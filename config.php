@@ -1,22 +1,15 @@
 <?php
 /**
- * Config global para compatibilidad con NAP y subpaths
+ * Config global para compatibilidad con rutas dinámicas
  */
 
 // Detectar base path (ruta bajo la que corre la app)
 if (!defined('APP_BASE_PATH')) {
     $scriptName = $_SERVER['SCRIPT_NAME'];
     
-    // Si el proyecto está en /var/www/html/42501611/, entonces:
-    // SCRIPT_NAME será /42501611/index.php
-    // Extraemos solo /42501611
-    if (preg_match('#^(/42501611)#', $scriptName, $matches)) {
-        $basePath = $matches[1];
-    } else {
-        // Fallback: usar dirname de SCRIPT_NAME
-        $basePath = dirname($scriptName);
-        $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
-    }
+    // Extraer directorio base automáticamente
+    $basePath = dirname($scriptName);
+    $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
     
     define('APP_BASE_PATH', $basePath);
 }

@@ -3,7 +3,7 @@ DirectoryIndex index.php
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /42501611
+    RewriteBase /
 
     # Servir archivos y directorios reales directamente
     RewriteCond %{REQUEST_FILENAME} -f [OR]
@@ -11,6 +11,6 @@ DirectoryIndex index.php
     RewriteRule ^ - [L]
 
     # Todo lo demás va a index.php (router dinámico)
-    RewriteCond %{REQUEST_URI} !^/42501611/index\.php
+    RewriteCond %{REQUEST_URI} !^/index\.php
     RewriteRule ^ index.php [L]
 </IfModule>
