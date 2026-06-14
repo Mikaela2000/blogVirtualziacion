@@ -3,7 +3,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include("conexion.php");
+include __DIR__ . '/conexion.php';
+
+$basePath = dirname($_SERVER['SCRIPT_NAME']);
+$basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +15,7 @@ include("conexion.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="<?= $basePath ?>/estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <title>Portfolio Mika</title>
@@ -37,7 +40,7 @@ include("conexion.php");
                             <li><a href="#servicios">Tecnologías</a></li>
                             <li><a href="#publicaciones">Publicaciones</a></li>
                             <li><a href="#contacto">Contacto</a></li>
-                            <li><a href="actualizar.php">Actualizar Blog</a></li>
+                            <li><a href="<?= $basePath ?>/actualizar.php">Actualizar Blog</a></li>
                         </ul>
                     </nav>
 
@@ -61,7 +64,7 @@ include("conexion.php");
                     Este sitio corresponde al Trabajo Práctico Final...
                 </p>
 
-                <a href="/img/CV Mikaela Monroy.pdf" download>Descargar Informe</a>
+                <a href="<?= $basePath ?>/img/CV Mikaela Monroy.pdf" download>Descargar Informe</a>
             </div>
 
         </div>
@@ -124,7 +127,7 @@ include("conexion.php");
     <p>UTN - FRT / Monroy Mikaela 2026</p>
 </footer>
 
-<script src="script.js"></script>
+<script src="<?= $basePath ?>/script.js"></script>
 
 </body>
 </html>
