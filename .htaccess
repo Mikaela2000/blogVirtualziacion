@@ -11,6 +11,5 @@ DirectoryIndex index.php
     RewriteRule ^ - [L]
 
     # Todo lo demás va a index.php (router dinámico)
-    RewriteCond %{REQUEST_URI} !^/index\.php
     RewriteRule ^ index.php [L]
 </IfModule>

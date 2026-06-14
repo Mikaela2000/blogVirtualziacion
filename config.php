@@ -1,15 +1,19 @@
 <?php
 /**
- * Config global para compatibilidad con rutas dinámicas
+ * Config global para compatibilidad con NAP y despliegues en subpaths
+ * Lee APP_BASE_PATH de Apache SetEnv o calcula automáticamente
  */
 
-// Detectar base path (ruta bajo la que corre la app)
 if (!defined('APP_BASE_PATH')) {
-    $scriptName = $_SERVER['SCRIPT_NAME'];
-    
-    // Extraer directorio base automáticamente
-    $basePath = dirname($scriptName);
-    $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
+    // Prioridad 1: Variable de entorno de Apache (SetEnv APP_BASE_PATH "/42501611")
+    if (!empty($_SERVER['APP_BASE_PATH'])) {
+        $basePath = $_SERVER['APP_BASE_PATH'];
+    } else {
+        // Prioridad 2: Calcular desde SCRIPT_NAME
+        $scriptName = $_SERVER['SCRIPT_NAME'];
+        $basePath = dirname($scriptName);
+        $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
+    }
     
     define('APP_BASE_PATH', $basePath);
 }
