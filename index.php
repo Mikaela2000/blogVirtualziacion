@@ -3,25 +3,20 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Cargar configuración global
+require_once __DIR__ . '/config.php';
+
 // ===== ROUTER DINÁMICO PARA ASSETS =====
-// Detectar la URI solicitada
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Limpiar base path
-$basePath = dirname($_SERVER['SCRIPT_NAME']);
-$basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
-
-// Eliminar el base path de la URI si existe
-if ($basePath && strpos($requestUri, $basePath) === 0) {
-    $requestUri = substr($requestUri, strlen($basePath));
-}
-
-// Eliminar el prefijo de NAP (/42501611) si existe
+// Limpiar prefijo NAP y base path
 if (strpos($requestUri, '/42501611') === 0) {
     $requestUri = substr($requestUri, strlen('/42501611'));
 }
+if (APP_BASE_PATH && strpos($requestUri, APP_BASE_PATH) === 0) {
+    $requestUri = substr($requestUri, strlen(APP_BASE_PATH));
+}
 
-// Normalizar la URI
 $requestUri = '/' . ltrim($requestUri, '/');
 
 // Extensiones de assets que servimos dinámicamente
@@ -30,10 +25,9 @@ $fileExt = strtolower(pathinfo($requestUri, PATHINFO_EXTENSION));
 
 // Si es un asset, servirlo dinámicamente
 if (in_array($fileExt, $assetExtensions)) {
-    $filePath = __DIR__ . $requestUri;
+    $filePath = asset_path($requestUri);
     
     if (file_exists($filePath) && is_file($filePath)) {
-        // MIME types para cada extensión
         $mimeTypes = [
             'css' => 'text/css; charset=UTF-8',
             'js' => 'application/javascript; charset=UTF-8',
@@ -61,9 +55,6 @@ if (in_array($fileExt, $assetExtensions)) {
 // ===== FIN DEL ROUTER - Si llegamos aquí, es una página HTML =====
 
 include __DIR__ . '/conexion.php';
-
-$basePath = dirname($_SERVER['SCRIPT_NAME']);
-$basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +63,7 @@ $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="<?= $basePath ?>/estilo.css">
+    <link rel="stylesheet" href="<?= app_url('/estilo.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <title>Portfolio Mika</title>
@@ -97,7 +88,7 @@ $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
                             <li><a href="#servicios">Tecnologías</a></li>
                             <li><a href="#publicaciones">Publicaciones</a></li>
                             <li><a href="#contacto">Contacto</a></li>
-                            <li><a href="<?= $basePath ?>/actualizar.php">Actualizar Blog</a></li>
+                            <li><a href="<?= app_url('/actualizar.php') ?>">Actualizar Blog</a></li>
                         </ul>
                     </nav>
 
@@ -121,7 +112,7 @@ $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
                     Este sitio corresponde al Trabajo Práctico Final...
                 </p>
 
-                <a href="<?= $basePath ?>/img/CV Mikaela Monroy.pdf" download>Descargar Informe</a>
+                <a href="<?= app_url('/img/CV Mikaela Monroy.pdf') ?>" download>Descargar Informe</a>
             </div>
 
         </div>
@@ -184,7 +175,7 @@ $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
     <p>UTN - FRT / Monroy Mikaela 2026</p>
 </footer>
 
-<script src="<?= $basePath ?>/script.js"></script>
+<script src="<?= app_url('/script.js') ?>"></script>
 
 </body>
 </html>

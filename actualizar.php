@@ -1,6 +1,5 @@
 <?php
-$basePath = dirname($_SERVER['SCRIPT_NAME']);
-$basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
+require_once __DIR__ . '/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +9,7 @@ $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualizar Blog</title>
-    <link rel="stylesheet" href="<?= $basePath ?>/estilo.css">
+    <link rel="stylesheet" href="<?= app_url('/estilo.css') ?>">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -19,7 +18,7 @@ $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
 
     <div class="contenedor-formulario">
 
-        <form class="formulario-blog" action="<?= $basePath ?>/guardar.php" method="POST">
+        <form class="formulario-blog" action="<?= app_url('/guardar.php') ?>" method="POST">
 
             <h2>Nueva Publicación</h2>
 
@@ -46,7 +45,7 @@ $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
 
             <br><br>
 
-            <a href="<?= $basePath ?>/index.php" class="btn-volver">
+            <a href="<?= app_url('/index.php') ?>" class="btn-volver">
                 <i class="fa-solid fa-house"></i>
                 Volver al Blog
             </a>
