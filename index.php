@@ -9,12 +9,9 @@ require_once __DIR__ . '/config.php';
 // ===== ROUTER DINÁMICO PARA ASSETS =====
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Limpiar prefijo NAP y base path
+// Limpiar /42501611 si está en la URI
 if (strpos($requestUri, '/42501611') === 0) {
     $requestUri = substr($requestUri, strlen('/42501611'));
-}
-if (APP_BASE_PATH && strpos($requestUri, APP_BASE_PATH) === 0) {
-    $requestUri = substr($requestUri, strlen(APP_BASE_PATH));
 }
 
 $requestUri = '/' . ltrim($requestUri, '/');

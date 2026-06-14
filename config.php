@@ -5,12 +5,17 @@
 
 // Detectar base path (ruta bajo la que corre la app)
 if (!defined('APP_BASE_PATH')) {
-    $basePath = dirname($_SERVER['SCRIPT_NAME']);
-    $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
+    $scriptName = $_SERVER['SCRIPT_NAME'];
     
-    // Limpiar prefijo NAP si existe
-    if (strpos($basePath, '/42501611') === 0) {
-        $basePath = substr($basePath, strlen('/42501611'));
+    // Si el proyecto está en /var/www/html/42501611/, entonces:
+    // SCRIPT_NAME será /42501611/index.php
+    // Extraemos solo /42501611
+    if (preg_match('#^(/42501611)#', $scriptName, $matches)) {
+        $basePath = $matches[1];
+    } else {
+        // Fallback: usar dirname de SCRIPT_NAME
+        $basePath = dirname($scriptName);
+        $basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
     }
     
     define('APP_BASE_PATH', $basePath);
@@ -18,7 +23,7 @@ if (!defined('APP_BASE_PATH')) {
 
 /**
  * Generar URL completa desde ruta relativa
- * Uso: app_url('/actualizar.php') → /42501611/actualizar.php o /actualizar.php
+ * Uso: app_url('/actualizar.php') → /42501611/actualizar.php
  */
 function app_url($path) {
     $path = '/' . ltrim($path, '/');
@@ -36,7 +41,7 @@ function app_redirect($path) {
 
 /**
  * Obtener ruta física de un archivo
- * Uso: asset_path('/estilo.css') → /var/www/html/estilo.css
+ * Uso: asset_path('/estilo.css') → /var/www/html/42501611/estilo.css
  */
 function asset_path($path) {
     return __DIR__ . '/' . ltrim($path, '/');
