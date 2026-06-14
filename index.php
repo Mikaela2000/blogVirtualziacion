@@ -3,6 +3,63 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// ===== ROUTER DINÁMICO PARA ASSETS =====
+// Detectar la URI solicitada
+$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// Limpiar base path
+$basePath = dirname($_SERVER['SCRIPT_NAME']);
+$basePath = $basePath === '/' ? '' : rtrim($basePath, '/');
+
+// Eliminar el base path de la URI si existe
+if ($basePath && strpos($requestUri, $basePath) === 0) {
+    $requestUri = substr($requestUri, strlen($basePath));
+}
+
+// Eliminar el prefijo de NAP (/42501611) si existe
+if (strpos($requestUri, '/42501611') === 0) {
+    $requestUri = substr($requestUri, strlen('/42501611'));
+}
+
+// Normalizar la URI
+$requestUri = '/' . ltrim($requestUri, '/');
+
+// Extensiones de assets que servimos dinámicamente
+$assetExtensions = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'pdf'];
+$fileExt = strtolower(pathinfo($requestUri, PATHINFO_EXTENSION));
+
+// Si es un asset, servirlo dinámicamente
+if (in_array($fileExt, $assetExtensions)) {
+    $filePath = __DIR__ . $requestUri;
+    
+    if (file_exists($filePath) && is_file($filePath)) {
+        // MIME types para cada extensión
+        $mimeTypes = [
+            'css' => 'text/css; charset=UTF-8',
+            'js' => 'application/javascript; charset=UTF-8',
+            'json' => 'application/json',
+            'png' => 'image/png',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'svg' => 'image/svg+xml',
+            'ico' => 'image/x-icon',
+            'pdf' => 'application/pdf'
+        ];
+        
+        header('Content-Type: ' . ($mimeTypes[$fileExt] ?? 'application/octet-stream'));
+        header('Cache-Control: public, max-age=3600');
+        header('Content-Length: ' . filesize($filePath));
+        readfile($filePath);
+        exit;
+    } else {
+        header('HTTP/1.0 404 Not Found');
+        exit('/* Asset not found: ' . htmlspecialchars($requestUri) . ' */');
+    }
+}
+
+// ===== FIN DEL ROUTER - Si llegamos aquí, es una página HTML =====
+
 include __DIR__ . '/conexion.php';
 
 $basePath = dirname($_SERVER['SCRIPT_NAME']);

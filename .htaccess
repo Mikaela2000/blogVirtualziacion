@@ -5,18 +5,12 @@ DirectoryIndex index.php
     RewriteEngine On
     RewriteBase /
 
-    # Si la petición apunta a un archivo o directorio real, servirlo directamente.
+    # Servir archivos y directorios reales directamente
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
 
-    # Compatibilidad con NAP: /42501611/xxx -> /xxx
-    # Esto evita que el proxy/NAP intente resolver rutas con prefijo como si fueran directorios.
-    RewriteRule ^42501611/(.*)$ /$1 [L,NE]
-
-    # Ruta principal del sitio bajo NAP.
-    RewriteRule ^42501611/?$ /index.php [L]
-
-    # Fallback seguro a index.php para rutas internas del blog.
-    RewriteRule . /index.php [L]
+    # Todo lo demás va a index.php (router dinámico)
+    RewriteCond %{REQUEST_URI} !^/index\.php
+    RewriteRule ^ /index.php [L]
 </IfModule>
