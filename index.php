@@ -84,7 +84,7 @@ include __DIR__ . '/conexion.php';
                                 <li><a href="#servicios">Tecnologías</a></li>
                                 <li><a href="#publicaciones">Publicaciones</a></li>
                                 <li><a href="#contacto">Contacto</a></li>
-                                <li><a href="actualizar.html">Actualizar Blog</a></li>
+                                <li><a href="actualizar.php">Actualizar Blog</a></li>
                             </ul>
                         </nav>
 
@@ -185,9 +185,12 @@ include __DIR__ . '/conexion.php';
 
         <!-- ----------------SECCION PUBLICACIONES------------------ -->
 
-       <div class="contenedor-publicaciones">
 
 <?php
+section id="publicaciones">
+    <h3 class="titulo-seccion">Publicaciones</h3>       
+
+       <div class="contenedor-publicaciones">
 
 $sql = "SELECT * FROM publicaciones ORDER BY fecha DESC";
 $resultado = $conexion->query($sql);
@@ -228,6 +231,7 @@ if ($resultado->num_rows > 0) {
 ?>
 
 </div>
+</section>
 
 
 
