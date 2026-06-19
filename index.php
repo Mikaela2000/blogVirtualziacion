@@ -121,7 +121,7 @@ include __DIR__ . '/conexion.php';
         <!-- ----------------SECCION DE SOBRE MI------------------ -->
         <section id="sobremi">
             <div class="contenedor-foto">
-                <img src="./img/fotoMia.jpeg" alt="Foto de Mikaela Monroy">
+                <img src="/42501611/img/fotoMia.jpeg" alt="Foto de Mikaela Monroy">
             </div>
             <div class="sobremi">
                 <p class="titulo-seccion">Sobre Mi</p>
