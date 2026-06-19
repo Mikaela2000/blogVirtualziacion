@@ -186,51 +186,48 @@ include __DIR__ . '/conexion.php';
         <!-- ----------------SECCION PUBLICACIONES------------------ -->
 
 
-<?php
-section id="publicaciones">
-    <h3 class="titulo-seccion">Publicaciones</h3>       
+<section id="publicaciones">
+    <h3 class="titulo-seccion">Publicaciones</h3>
 
-       <div class="contenedor-publicaciones">
+    <div class="contenedor-publicaciones">
 
-$sql = "SELECT * FROM publicaciones ORDER BY fecha DESC";
-$resultado = $conexion->query($sql);
+        <?php
+        $sql = "SELECT * FROM publicaciones ORDER BY fecha DESC";
+        $resultado = $conexion->query($sql);
 
-if ($resultado->num_rows > 0) {
+        if ($resultado->num_rows > 0) {
 
-    while ($fila = $resultado->fetch_assoc()) {
+            while ($fila = $resultado->fetch_assoc()) {
+        ?>
 
-?>
+                <div class="publicacion">
+                    <h4><?php echo $fila['titulo']; ?></h4>
 
-        <div class="publicacion">
-            <h4><?php echo $fila['titulo']; ?></h4>
+                    <p class="fecha">
+                        <?php echo $fila['fecha']; ?>
+                    </p>
 
-            <p class="fecha">
-                <?php echo $fila['fecha']; ?>
-            </p>
+                    <p>
+                        <?php echo $fila['contenido']; ?>
+                    </p>
+                </div>
 
-            <p>
-                <?php echo $fila['contenido']; ?>
-            </p>
-        </div>
+        <?php
+            }
 
-<?php
+        } else {
+        ?>
 
-    }
+            <div class="publicacion">
+                <h4>No hay publicaciones todavía</h4>
+                <p>Utiliza la opción "Actualizar Blog" para agregar una nueva publicación.</p>
+            </div>
 
-} else {
+        <?php
+        }
+        ?>
 
-?>
-
-    <div class="publicacion">
-        <h4>No hay publicaciones todavía</h4>
-        <p>Utiliza la opción "Actualizar Blog" para agregar una nueva publicación.</p>
     </div>
-
-<?php
-}
-?>
-
-</div>
 </section>
 
 
