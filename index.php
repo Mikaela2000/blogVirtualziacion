@@ -121,7 +121,7 @@ include __DIR__ . '/conexion.php';
         <!-- ----------------SECCION DE SOBRE MI------------------ -->
         <section id="sobremi">
             <div class="contenedor-foto">
-                <img src="<?= BASE_URL ?>/img/fotoMia.jpeg" alt="Foto de Mikaela Monroy">
+                <img src="image.php?file=fotoMia.jpeg" alt="Foto de Mikaela Monroy">
             </div>
             <div class="sobremi">
                 <p class="titulo-seccion">Sobre Mi</p>
@@ -149,25 +149,25 @@ include __DIR__ . '/conexion.php';
             <div class="fila">
                 <div class="servicios">
 
-                    <div class="icono"><img src="/img/proxmox.png" alt=""></div>
-                    <div class="icono"><img src="/img/ubuntu.png" alt=""></div>
-                    <div class="icono"><img src="/img/php.png" alt=""></div>
-                    <div class="icono"><img src="/img/Apache.png" alt=""></div>
-                    <div class="icono"><img src="/img/mariadb.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=proxmox.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=ubuntu.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=php.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=Apache.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=mariadb.png" alt=""></div>
 
 
-                    <div class="icono"><img src="/img/proxmox.png" alt=""></div>
-                    <div class="icono"><img src="/img/ubuntu.png" alt=""></div>
-                    <div class="icono"><img src="/img/php.png" alt=""></div>
-                    <div class="icono"><img src="/img/Apache.png" alt=""></div>
-                    <div class="icono"><img src="/img/mariadb.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=proxmox.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=ubuntu.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=php.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=Apache.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=mariadb.png" alt=""></div>
 
 
-                    <div class="icono"><img src="/img/html.png" alt=""></div>
-                    <div class="icono"><img src="/img/css.png" alt=""></div>
-                    <div class="icono"><img src="/img/js.png" alt=""></div>
-                    <div class="icono"><img src="/img/git.png" alt=""></div>
-                    <div class="icono"><img src="/img/github.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=html.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=css.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=js.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=git.png" alt=""></div>
+                    <div class="icono"><img src="image.php?file=github.png" alt=""></div>
 
 
                     <!-- <div class="icono"><img src="./img/html.png" alt=""></div>
