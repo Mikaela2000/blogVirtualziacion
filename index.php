@@ -3,24 +3,23 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Cargar configuración global
+
 require_once __DIR__ . '/config.php';
 
-// ===== ROUTER DINÁMICO PARA ASSETS =====
+
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Limpiar /42501611 si está en la URI
 if (strpos($requestUri, '/42501611') === 0) {
     $requestUri = substr($requestUri, strlen('/42501611'));
 }
 
 $requestUri = '/' . ltrim($requestUri, '/');
 
-// Extensiones de assets que servimos dinámicamente
+
 $assetExtensions = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'pdf'];
 $fileExt = strtolower(pathinfo($requestUri, PATHINFO_EXTENSION));
 
-// Si es un asset, servirlo dinámicamente
+
 if (in_array($fileExt, $assetExtensions)) {
     $filePath = asset_path($requestUri);
     
@@ -60,7 +59,7 @@ include __DIR__ . '/conexion.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="<?= app_url('/estilo.css') ?>">
+    <link rel="stylesheet" href="style.php">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <title>Portfolio Mika</title>
