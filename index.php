@@ -203,7 +203,7 @@ include __DIR__ . '/conexion.php';
         <h4><?php echo $fila['titulo']; ?></h4>
 
         <p class="fecha">
-            <?php echo $fila['fecha']; ?>
+            <?php echo date("d/m/Y", strtotime($fila['fecha'])); ?>
         </p>
 
         <p>
