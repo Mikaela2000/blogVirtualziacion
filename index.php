@@ -48,7 +48,6 @@ if (in_array($fileExt, $assetExtensions)) {
     }
 }
 
-// ===== FIN DEL ROUTER - Si llegamos aquí, es una página HTML =====
 
 include __DIR__ . '/conexion.php';
 ?>
@@ -112,7 +111,7 @@ include __DIR__ . '/conexion.php';
                         con una arquitectura compuesta por un servidor de aplicaciones y un servidor de base de datos
                         independientes.
                     </p>
-                    <a href="/img/CV Mikaela Monroy.pdf" download="CV Mikaela Monroy.pdf">Descargar Informe</a>
+                    <a href="<?= app_url('pdf.php') ?>">Descargar Informe</a>
                 </div>
 
             </div>
