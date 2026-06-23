@@ -210,7 +210,7 @@ include __DIR__ . '/conexion.php';
             <?php echo $fila['contenido']; ?>
         </p>
 
-        <form action="<?= app_url('/eliminar_publicacion.php') ?>" method="POST"
+        <form action="<?= app_url('/delete.php') ?>" method="POST"
               onsubmit="return confirm('¿Estás seguro de eliminar esta publicación?');">
 
             <input type="hidden" name="id" value="<?php echo $fila['id']; ?>">
@@ -222,7 +222,7 @@ include __DIR__ . '/conexion.php';
         </form>
     </div>
 
-<?php
+        <?php
 
             }
 
