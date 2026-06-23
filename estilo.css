@@ -787,3 +787,17 @@ footer a {
     text-decoration-color: #d3d3d3;
     text-decoration-thickness: 5px;
 }
+
+.btn-eliminar {
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-eliminar:hover {
+    background-color: #bb2d3b;
+}
