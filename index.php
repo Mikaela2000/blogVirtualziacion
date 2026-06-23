@@ -196,22 +196,34 @@ include __DIR__ . '/conexion.php';
 
         if ($resultado->num_rows > 0) {
 
-            while ($fila = $resultado->fetch_assoc()) {
-        ?>
+         while ($fila = $resultado->fetch_assoc()) {
+?>
 
-                <div class="publicacion">
-                    <h4><?php echo $fila['titulo']; ?></h4>
+    <div class="publicacion">
+        <h4><?php echo $fila['titulo']; ?></h4>
 
-                    <p class="fecha">
-                        <?php echo $fila['fecha']; ?>
-                    </p>
+        <p class="fecha">
+            <?php echo $fila['fecha']; ?>
+        </p>
 
-                    <p>
-                        <?php echo $fila['contenido']; ?>
-                    </p>
-                </div>
+        <p>
+            <?php echo $fila['contenido']; ?>
+        </p>
 
-        <?php
+        <form action="<?= app_url('/eliminar_publicacion.php') ?>" method="POST"
+              onsubmit="return confirm('¿Estás seguro de eliminar esta publicación?');">
+
+            <input type="hidden" name="id" value="<?php echo $fila['id']; ?>">
+
+            <button type="submit" class="btn-eliminar">
+                Eliminar
+            </button>
+
+        </form>
+    </div>
+
+<?php
+
             }
 
         } else {
