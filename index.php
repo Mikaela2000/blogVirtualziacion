@@ -260,11 +260,6 @@ include __DIR__ . '/conexion.php';
     <!-- ----------------SECCION FOOTER------------------ -->
 <footer>
     <p>UTN - FRT / Monroy Mikaela 2026</p>
-    <div class="redes">
-        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-twitter"></i></a>
-    </div>
 </footer>
 
 <script src="script.php"></script>
